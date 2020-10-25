@@ -20,9 +20,32 @@ const TabStack = createBottomTabNavigator();
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Drawer.Navigator initialRouteName='Home'>
-				<Drawer.Screen name='Home' component={Home} />
-				<Drawer.Screen name='checkout' component={Checkout} />
+			<Drawer.Navigator
+				initialRouteName='Home'
+				drawerLable
+				drawerType='front'
+				overlayColor='transparent'
+				drawerContentOptions={{
+					labelStyle: {
+						color: 'black',
+						fontWeight: 'bold',
+						borderWidth: 1,
+						padding: 10,
+						borderRadius: 20,
+					},
+					style: {
+						backgroundColor: 'white',
+					},
+				}}>
+				<Drawer.Screen
+					name='Home'
+					component={Home}
+					options={{
+						drawerLabel: 'Home',
+						color: 'white',
+					}}
+				/>
+				<Drawer.Screen name='Checkout' component={Checkout} />
 			</Drawer.Navigator>
 		</NavigationContainer>
 	);
