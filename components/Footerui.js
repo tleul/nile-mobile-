@@ -15,8 +15,10 @@ const Footerui = ({ navigation }) => {
 		<Container>
 			<Content />
 			<Footer>
-				<FooterTab>
-					<Button vertical>
+				<FooterTab style={{ backgroundColor: '#c4dcf5' }}>
+					<Button
+						vertical
+						onPress={() => navigation.navigate('Home')}>
 						<Icon name='home' />
 						<Text style={{ fontSize: 12 }}>Home</Text>
 					</Button>
@@ -31,7 +33,7 @@ const Footerui = ({ navigation }) => {
 					<Button
 						badge
 						vertical
-						onPress={() => navigation.navigate('checkout')}>
+						onPress={() => navigation.navigate('Checkout')}>
 						<Badge>
 							<Text style={{ fontSize: 12 }}>51</Text>
 						</Badge>
