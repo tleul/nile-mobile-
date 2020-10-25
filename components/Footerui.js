@@ -10,36 +10,33 @@ import {
 	Text,
 	Badge,
 } from 'native-base';
-const Footerui = () => {
+const Footerui = ({ navigation }) => {
 	return (
 		<Container>
 			<Content />
 			<Footer>
 				<FooterTab>
+					<Button vertical>
+						<Icon name='home' />
+						<Text style={{ fontSize: 12 }}>Home</Text>
+					</Button>
+
 					<Button badge vertical>
 						<Badge>
-							<Text>2</Text>
+							<Text>1</Text>
 						</Badge>
-						<Icon name='apps' />
-						<Text>Apps</Text>
+						<Icon name='heart' />
+						<Text style={{ fontSize: 12 }}>Favorite</Text>
 					</Button>
-					<Button vertical>
-						<Icon name='camera' />
-						<Text>Camera</Text>
-					</Button>
-					<Button active badge vertical>
+					<Button
+						badge
+						vertical
+						onPress={() => navigation.navigate('checkout')}>
 						<Badge>
-							<Text>51</Text>
-						</Badge>
-						<Icon active name='navigate' />
-						<Text>Navigate</Text>
-					</Button>
-					<Button active badge vertical>
-						<Badge>
-							<Text>51</Text>
+							<Text style={{ fontSize: 12 }}>51</Text>
 						</Badge>
 						<Icon name='cart' />
-						<Text>Cart</Text>
+						<Text style={{ fontSize: 12 }}>Cart</Text>
 					</Button>
 				</FooterTab>
 			</Footer>
