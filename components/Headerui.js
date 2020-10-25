@@ -6,7 +6,7 @@ const Headerui = ({ navigation }) => {
 	return (
 		<>
 			<Header
-				rightComponent={
+				leftComponent={
 					<Icon
 						name='menu'
 						onPress={() => navigation.toggleDrawer()}
@@ -16,9 +16,7 @@ const Headerui = ({ navigation }) => {
 					text: 'Nile Mart',
 					style: { color: '#fff' },
 				}}
-				leftComponent={{ icon: 'home', color: '#fff' }}
 			/>
-			<Footerui />
 		</>
 	);
 };
