@@ -10,9 +10,7 @@ const Home = ({ navigation }) => {
 	return (
 		<>
 			<Headerui navigation={navigation} />
-			<Text style={styles.text}>
-				DashBoard Displaying Collection of Products
-			</Text>
+			<Text style={styles.text}>Component </Text>
 			<ProductCard />
 			<Footerui navigation={navigation} />
 		</>
