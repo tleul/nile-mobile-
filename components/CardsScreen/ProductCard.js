@@ -1,7 +1,8 @@
-import React from 'react';
-import { Text, View, StyleSheet, Image } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Text, View, StyleSheet, Image, FlatList } from 'react-native';
 import { Rating, AirbnbRating } from 'react-native-elements';
 
+import axios from 'axios';
 import {
 	Container,
 	Header,
@@ -18,85 +19,87 @@ import {
 
 import Footerui from '../Footerui';
 import Headerui from '../Headerui';
-const img = {
-	uri:
-		'https://serverless-thumbnails-creator-tgtbucket-1khnw0wl97ad2.s3-us-west-1.amazonaws.com/profile/A-1600927946908.png',
-};
-const img2 = {
-	uri:
-		'https://images-na.ssl-images-amazon.com/images/I/51qMNxOvK8L._AC_UL160_.jpg',
-};
+import ImageDisplay from './ImageCard';
+
 const ProductCard = ({ navigation }) => {
+	useEffect(() => {
+		getProduct();
+	}, []);
+	const [product, setProduct] = useState([]);
+
+	const getProduct = async () => {
+		try {
+			const data = await axios.get(
+				'http://127.0.0.1:2020/api/productInfo',
+			);
+			setProduct(data.data);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<>
 			<View style={styles.productContainer}>
-				<View style={styles.cardContainer}>
-					<View>
-						<Image
-							source={img}
-							style={{ height: 200, width: 200 }}
+				{product.map((product) => (
+					<View style={styles.cardContainer}>
+						<ImageDisplay
+							productImages={
+								product.product_images[0].thumb_medium
+							}
 						/>
-					</View>
-
-					<View style={styles.productContent}>
-						<View style={styles.textDescription}>
-							<Text style={styles.text}>Nike Shoe</Text>
-							<Text style={styles.text}>
-								<Rating
-									style={{ paddingLeft: 10 }}
-									imageSize={20}
-									readonly
-									startingValue={3}
-								/>
-							</Text>
-							<Text style={styles.text}>
-								Delivered in 3 days{' '}
-							</Text>
-							<Text style={styles.text}>$ 56</Text>
-						</View>
-						<View>
-							<Button style={styles.addButton}>
-								<Text style={styles.textButton}>Add</Text>
-							</Button>
-						</View>
-					</View>
-				</View>
-				<View style={styles.cardContainer}>
-					<View>
-						<Image
-							source={img2}
-							style={{ height: 200, width: 200 }}
-						/>
-					</View>
-
-					<View style={styles.productContent}>
-						<View style={styles.textDescription}>
-							<Text style={styles.text}>Tomoca Coffee</Text>
-							<Text style={styles.text}>
-								<Rating
-									style={{ paddingLeft: 10 }}
-									imageSize={20}
-									readonly
-									startingValue={4.5}
-								/>
-							</Text>
-							<Text style={styles.text}>
-								Delivered in 1 days{' '}
-							</Text>
-							<Text style={styles.text}>$ 20</Text>
-						</View>
-						<View>
-							<Button style={styles.addButton}>
-								<Text style={styles.textButton}>Add</Text>
-							</Button>
+						<View style={styles.productContent}>
+							<View style={styles.textDescription}>
+								<Text style={styles.text}>
+									{product.product_name}
+								</Text>
+								<Text style={styles.text}>
+									<Rating
+										style={{ paddingLeft: 10 }}
+										imageSize={20}
+										readonly
+										startingValue={3}
+									/>
+								</Text>
+								<Text style={styles.text}>
+									Delivered in {product.product_estdelivery}{' '}
+									days
+								</Text>
+								<Text style={styles.text}>
+									$ {product.product_price}
+								</Text>
+							</View>
+							<View>
+								<Button style={styles.addButton}>
+									<Text style={styles.textButton}>Add</Text>
+								</Button>
+							</View>
 						</View>
 					</View>
-				</View>
+				))}
 			</View>
 		</>
 	);
 };
 const styles = StyleSheet.create({
+	left: {
+		margin: 5,
+		position: 'absolute',
+		bottom: 100,
+		left: 0,
+		width: 25,
+		height: 25,
+		color: 'tomato',
+	},
+	right: {
+		margin: 5,
+		position: 'absolute',
+		bottom: 100,
+		right: 0,
+		width: 25,
+		height: 25,
+		color: 'tomato',
+	},
 	productContainer: {
 		flexDirection: 'column',
 		backgroundColor: 'white',
